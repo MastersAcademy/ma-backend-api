@@ -11,10 +11,12 @@ RUN npm install
 # Copy the rest of application code
 COPY . .
 
-#COPY .env.prod ./
+#COPY .env.prod ./ 
 
 RUN npm run build
 
 EXPOSE 3000
 
 CMD [ "npm", "run", "start" ]
+
+## it's optional row - test full chain ci/cd ##
