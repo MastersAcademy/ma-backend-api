@@ -19,4 +19,4 @@ EXPOSE 3000
 
 CMD [ "npm", "run", "start" ]
 
-## it's optional row - test full chain ci/cd ##
+## it's optional row - test full chain ci/cd _ part2 ##
