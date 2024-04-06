@@ -7,9 +7,9 @@ import { SeedService } from '@services/seed.service';
 export class SeedController {
   constructor(private seedService: SeedService) {}
 
-  @ApiExcludeEndpoint()
-  @Post()
-  init() {
-    return this.seedService.init();
-  }
+  // @ApiExcludeEndpoint()
+  // @Post()
+  // init() {
+  //   return this.seedService.init();
+  // }
 }

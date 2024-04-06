@@ -7,7 +7,7 @@ import {
   Put,
   Query,
   Post,
-  Delete,
+  Delete, UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -17,6 +17,7 @@ import { FilterProductsDto } from '@dtos/product.dto';
 import { UpdateCategoryDto } from '@dtos/category.dto';
 import { CreateCategoryDto } from '@dtos/category.dto';
 import { FilterCategoriesDto } from '@dtos/category.dto';
+import {JwtAuthGuard} from "@guards/jwt-auth.guard";
 
 @ApiTags('categories')
 @Controller('categories')
@@ -26,11 +27,13 @@ export class CategoriesController {
     private productsService: ProductsService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   getAll(@Query() params: FilterCategoriesDto) {
     return this.categoriesService.getAll(params);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
     return this.categoriesService.findById(id);
@@ -41,6 +44,7 @@ export class CategoriesController {
   //   return this.categoriesService.create(category);
   // }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id/products')
   getProductsByCategory(
     @Param('id', ParseIntPipe) id: number,

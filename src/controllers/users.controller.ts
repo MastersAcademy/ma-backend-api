@@ -7,18 +7,21 @@ import {
   Param,
   Put,
   ParseIntPipe,
-  Delete,
+  Delete, UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { UsersService } from '@services/users.service';
 import { CreateUserDto, ValidateUserDto, UpdateUserDto } from '@dtos/user.dto';
 import { FilterUsersDto } from '@dtos/user.dto';
+import {JwtAuthGuard} from "@guards/jwt-auth.guard";
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
+
+  @UseGuards(JwtAuthGuard)
   @Get()
   getAll(@Query() params: FilterUsersDto) {
     return this.usersService.getAll(params);
@@ -29,6 +32,7 @@ export class UsersController {
     return this.usersService.findById(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() dto: CreateUserDto) {
     return this.usersService.create(dto);
