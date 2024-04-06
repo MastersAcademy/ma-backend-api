@@ -38,17 +38,17 @@ export class UsersController {
   isAvailable(@Body() dto: ValidateUserDto) {
     return this.usersService.isAvailable(dto);
   }
-
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() changes: UpdateUserDto,
-  ) {
-    return this.usersService.update(id, changes);
-  }
-
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.delete(id);
-  }
+  //
+  // @Put(':id')
+  // update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @Body() changes: UpdateUserDto,
+  // ) {
+  //   return this.usersService.update(id, changes);
+  // }
+  //
+  // @Delete(':id')
+  // delete(@Param('id', ParseIntPipe) id: number) {
+  //   return this.usersService.delete(id);
+  // }
 }

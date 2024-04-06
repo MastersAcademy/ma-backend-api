@@ -16,25 +16,25 @@ import { editFileName } from '@utils/file-utils';
 @ApiTags('files')
 @Controller('files')
 export class FilesController {
-  @Post('upload')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: multer.diskStorage({
-        destination: './upload',
-        filename: editFileName,
-      }),
-    }),
-  )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return {
-      originalname: file.originalname,
-      filename: file.filename,
-      location: `https://api.escuelajs.co/api/v1/files/${file.filename}`,
-    };
-  }
-
-  @Get(':filename')
-  seeUploadedFile(@Param('filename') filename: string, @Res() res: Response) {
-    return res.sendFile(filename, { root: './upload' });
-  }
+  // @Post('upload')
+  // @UseInterceptors(
+  //   FileInterceptor('file', {
+  //     storage: multer.diskStorage({
+  //       destination: './upload',
+  //       filename: editFileName,
+  //     }),
+  //   }),
+  // )
+  // uploadFile(@UploadedFile() file: Express.Multer.File) {
+  //   return {
+  //     originalname: file.originalname,
+  //     filename: file.filename,
+  //     location: `https://api.escuelajs.co/api/v1/files/${file.filename}`,
+  //   };
+  // }
+  //
+  // @Get(':filename')
+  // seeUploadedFile(@Param('filename') filename: string, @Res() res: Response) {
+  //   return res.sendFile(filename, { root: './upload' });
+  // }
 }

@@ -36,10 +36,10 @@ export class CategoriesController {
     return this.categoriesService.findById(id);
   }
 
-  @Post()
-  create(@Body() category: CreateCategoryDto) {
-    return this.categoriesService.create(category);
-  }
+  // @Post()
+  // create(@Body() category: CreateCategoryDto) {
+  //   return this.categoriesService.create(category);
+  // }
 
   @Get(':id/products')
   getProductsByCategory(
@@ -49,16 +49,16 @@ export class CategoriesController {
     return this.productsService.byCategory(id, params);
   }
 
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() changes: UpdateCategoryDto,
-  ) {
-    return this.categoriesService.update(id, changes);
-  }
-
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.categoriesService.delete(id);
-  }
+  // @Put(':id')
+  // update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @Body() changes: UpdateCategoryDto,
+  // ) {
+  //   return this.categoriesService.update(id, changes);
+  // }
+  //
+  // @Delete(':id')
+  // delete(@Param('id', ParseIntPipe) id: number) {
+  //   return this.categoriesService.delete(id);
+  // }
 }
