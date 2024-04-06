@@ -31,27 +31,27 @@ export class ProductsController {
     return this.productsService.findById(id);
   }
 
-  @Post()
-  create(@Body() product: CreateProductDto) {
-    return this.productsService.create(product);
-  }
-
-  @Put(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() changes: UpdateProductDto,
-  ) {
-    return this.productsService.update(id, changes);
-  }
-
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.delete(id);
-  }
-
-  @ApiExcludeEndpoint()
-  @Post('/raw')
-  getRaw() {
-    return this.productsService.getRaw();
-  }
+  // @Post()
+  // create(@Body() product: CreateProductDto) {
+  //   return this.productsService.create(product);
+  // }
+  //
+  // @Put(':id')
+  // update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @Body() changes: UpdateProductDto,
+  // ) {
+  //   return this.productsService.update(id, changes);
+  // }
+  //
+  // @Delete(':id')
+  // delete(@Param('id', ParseIntPipe) id: number) {
+  //   return this.productsService.delete(id);
+  // }
+  //
+  // @ApiExcludeEndpoint()
+  // @Post('/raw')
+  // getRaw() {
+  //   return this.productsService.getRaw();
+  // }
 }
