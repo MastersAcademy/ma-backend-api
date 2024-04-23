@@ -8,7 +8,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { Field, InputType, ArgsType } from '@nestjs/graphql';
 
-@InputType()
+// @InputType()
 export class CreateCategoryDto {
   @ApiProperty()
   @IsString()

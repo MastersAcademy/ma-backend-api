@@ -22,13 +22,13 @@ import {JwtAuthGuard} from "@guards/jwt-auth.guard";
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   getAll(@Query() params: FilterProductsDto) {
     return this.productsService.getAll(params);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   getProduct(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.findById(id);

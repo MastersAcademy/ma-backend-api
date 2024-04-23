@@ -27,13 +27,13 @@ export class CategoriesController {
     private productsService: ProductsService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   getAll(@Query() params: FilterCategoriesDto) {
     return this.categoriesService.getAll(params);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   getOne(@Param('id', ParseIntPipe) id: number) {
     return this.categoriesService.findById(id);
@@ -44,7 +44,7 @@ export class CategoriesController {
   //   return this.categoriesService.create(category);
   // }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id/products')
   getProductsByCategory(
     @Param('id', ParseIntPipe) id: number,
