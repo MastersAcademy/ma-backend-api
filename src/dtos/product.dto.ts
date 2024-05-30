@@ -11,7 +11,7 @@ import {
   ArrayMinSize,
 } from 'class-validator';
 import { Field, InputType, ArgsType, Int } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 @InputType()
 export class CreateProductDto {
@@ -85,37 +85,45 @@ export class UpdateProductDto {
 
 @ArgsType()
 export class FilterProductsDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNumber()
   @IsOptional()
   @Field(() => Int, { nullable: true })
   limit: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNumber()
   @IsOptional()
   @Field(() => Int, { nullable: true })
   offset: number;
 
+  @ApiPropertyOptional()
+  @IsNumber()
   @IsOptional()
   @Field(() => Int, { nullable: true })
   price: number;
 
+  @ApiPropertyOptional()
+  @IsNumber()
   @IsOptional()
   @Min(0)
   @Field(() => Int, { nullable: true })
   price_min: number;
 
+  @ApiPropertyOptional()
+  @IsNumber()
   @ValidateIf((params) => params.minPrice)
   @IsPositive()
   @Field(() => Int, { nullable: true })
   price_max: number;
 
+  @ApiPropertyOptional()
   @IsOptional()
   @IsString()
   @Field({ nullable: true })
   title: string;
 
+  @ApiPropertyOptional()
   @IsOptional()
   @IsNumber()
   @Field({ nullable: true })
