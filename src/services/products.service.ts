@@ -38,7 +38,7 @@ export class ProductsService {
     return this.productsRepo.find(options);
   }
 
-  getAll(params: FilterProductsDto) {
+  async getAll(params: FilterProductsDto) {
     const options: FindManyOptions<Product> = {
       relations: ['category'],
     };
@@ -72,11 +72,18 @@ export class ProductsService {
       };
     }
 
+    if (params?.sortOrder) {
+      options.order = {
+        price: params.sortOrder,
+      };
+    }
+
     if (params?.limit > 0 && params?.offset >= 0) {
       options.take = params?.limit;
       options.skip = params?.offset;
     }
-    return this.productsRepo.find(options);
+    const [products, total] = await this.productsRepo.findAndCount(options);
+    return { products, total };
   }
 
   findById(id: number) {
