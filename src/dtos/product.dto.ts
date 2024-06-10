@@ -8,8 +8,8 @@ import {
   Min,
   ValidateIf,
   IsUrl,
-  ArrayMinSize,
-} from 'class-validator';
+  ArrayMinSize, IsIn
+} from "class-validator";
 import { Field, InputType, ArgsType, Int } from '@nestjs/graphql';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
@@ -128,4 +128,10 @@ export class FilterProductsDto {
   @IsNumber()
   @Field({ nullable: true })
   categoryId: number;
+
+  @ApiPropertyOptional({ enum: ['asc', 'desc'] })
+  @IsOptional()
+  @IsIn(['asc', 'desc'])
+  @Field({ nullable: true })
+  sortOrder: 'asc' | 'desc';
 }
