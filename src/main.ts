@@ -28,6 +28,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('MA Fake Store API')
     .setVersion('1.0')
+    .addBearerAuth() // This line enables BearerAuth globally
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

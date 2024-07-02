@@ -21,27 +21,27 @@ import {JwtAuthGuard} from "@guards/jwt-auth.guard";
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  getAll(@Query() params: FilterUsersDto) {
-    return this.usersService.getAll(params);
-  }
-
-  @Get(':id')
-  get(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findById(id);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() dto: CreateUserDto) {
-    return this.usersService.create(dto);
-  }
-
-  @Post('is-available')
-  isAvailable(@Body() dto: ValidateUserDto) {
-    return this.usersService.isAvailable(dto);
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get()
+  // getAll(@Query() params: FilterUsersDto) {
+  //   return this.usersService.getAll(params);
+  // }
+  //
+  // @Get(':id')
+  // get(@Param('id', ParseIntPipe) id: number) {
+  //   return this.usersService.findById(id);
+  // }
+  //
+  // @UseGuards(JwtAuthGuard)
+  // @Post()
+  // create(@Body() dto: CreateUserDto) {
+  //   return this.usersService.create(dto);
+  // }
+  //
+  // @Post('is-available')
+  // isAvailable(@Body() dto: ValidateUserDto) {
+  //   return this.usersService.isAvailable(dto);
+  // }
   //
   // @Put(':id')
   // update(

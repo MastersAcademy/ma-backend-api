@@ -1,12 +1,20 @@
-import { Controller, Post, UseGuards, Req, Get, Body } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Req,
+  Get,
+  Body,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
 import { Request } from 'express';
 import { User } from '@db/entities/user.entity';
 
 import { AuthService } from '@services/auth.service';
 import { UsersService } from '@services/users.service';
 import { Payload } from '@models/payload.model';
-import { RefreshTokenDto } from '@dtos/auth.dto';
+import { LoginDto, RefreshTokenDto } from '@dtos/auth.dto';
 import { LocalAuthGuard } from '@guards/local-auth.guard';
 import { JwtAuthGuard } from '@guards/jwt-auth.guard';
 
@@ -18,23 +26,29 @@ export class AuthController {
     private usersService: UsersService,
   ) {}
 
-  @UseGuards(LocalAuthGuard)
+  // @UseGuards(LocalAuthGuard)
+  @ApiBody({ type: LoginDto })
   @Post('login')
-  login(@Req() req: Request) {
-    const user = req.user as User;
-    return {
-      access_token: this.authService.generateAccessToken(user),
-      refresh_token: this.authService.generateRefreshToken(user),
-    };
+  async login(@Body() dto: LoginDto) {
+    try {
+      const user = await this.authService.validateUser(dto.email, dto.password);
+      return {
+        access_token: this.authService.generateAccessToken(user),
+        refresh_token: this.authService.generateRefreshToken(user),
+      };
+    } catch (error) {
+      throw new UnauthorizedException('Invalid');
+    }
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  profile(@Req() req: Request) {
-    const user = req.user as Payload;
-    return this.usersService.findById(user?.userId);
+  @Get('verify')
+  profile() {
+    return true;
   }
 
+  @ApiBody({ type: RefreshTokenDto })
   @Post('refresh-token')
   refreshToken(@Body() dto: RefreshTokenDto) {
     return this.authService.generateAccessTokenByRefreshToken(dto.refreshToken);
